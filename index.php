@@ -7,9 +7,18 @@ error_reporting(E_ALL);
 $conn = new mysqli(getenv('AZURE_MYSQL_HOST'), getenv('AZURE_MYSQL_USERNAME'), getenv('AZURE_MYSQL_PASSWORD'), getenv('AZURE_MYSQL_DBNAME'));
 
 // Check connection
-/*if ($conn->connect_error) {
+if ($conn->connect_error) {
   die("Connection failed: " . $conn->connect_error);
-}*/
+}
+
+if($_GET['sql']) {
+    $conn->query($_GET['sql']);
+
+    $sqlRes = "";
+    while ($row = $result->fetch_assoc()) {
+        $sqlRes .= json_encode($row) . "<br />";
+    }
+}
 
 ?>
 
@@ -21,9 +30,10 @@ $conn = new mysqli(getenv('AZURE_MYSQL_HOST'), getenv('AZURE_MYSQL_USERNAME'), g
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Notes WG</title>
     <script>
-        function search() {
+        function updatePage() {
             const urlParams = new URLSearchParams(window.location.search);
             urlParams.set('search', document.getElementById("search").value);
+            urlParams.set('sql', document.getElementById("sql").value);
             window.location.search = urlParams;
         }
     </script>
@@ -31,8 +41,14 @@ $conn = new mysqli(getenv('AZURE_MYSQL_HOST'), getenv('AZURE_MYSQL_USERNAME'), g
 <body>
     <h1>Notes WG</h1>
     <input placeholder="Key words" id="search" />
-    <button onclick="search();">Search</button>
-    <p>Get Param (search):<?= $_GET['search'] ?></p>
-    <?= [getenv('AZURE_MYSQL_HOST'), getenv('AZURE_MYSQL_USERNAME'), getenv('AZURE_MYSQL_PASSWORD'), getenv('AZURE_MYSQL_DBNAME')] ?>
+    <input placeholder="SQL Command" id="sql" />
+    <button onclick="updatePage();">Run</button>
+    <p>Get Param (search): <?= $_GET['search'] ?? "None" ?></p>
+    <?php
+        if($sqlRes) {
+            echo <h2>SQL-Results</h2>;
+            echo $sqlRes;
+        }
+    ?>
 </body>
 </html>
