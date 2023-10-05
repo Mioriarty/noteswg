@@ -46,7 +46,7 @@ if($_GET['sql']) {
 <body>
     <h1>Notes WG</h1>
     <h2>Create Note</h2>
-    <textarea id="now_node" rows="4" cols="50" placeholder="node_text" />
+    <textarea id="now_node" rows="4" cols="50" placeholder="node_text"></textarea>
     <button onclick="createNote()">Create</button>
 
     <h2>View Notes</h2>
