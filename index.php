@@ -7,6 +7,6 @@
 </head>
 <body>
     <h1>Notes WG</h1>
-    <p>Get Param (search):<?= $GET['serach'] ?></p>
+    <p>Get Param (search):<?= $_GET['search'] ?></p>
 </body>
 </html>
