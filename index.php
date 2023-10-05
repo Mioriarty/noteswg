@@ -100,7 +100,6 @@ if(isset($_GET['del_note_text'])) {
     <h2>SQL Queries</h2>
     <input placeholder="SQL Command" id="sql" />
     <button onclick="runSql();">Run</button>
-    <p>Get Param (search): <?= $_GET['search'] ?? "None" ?></p>
     <?php
         if($sqlRes) {
             echo "<h3>Results</h3>";
