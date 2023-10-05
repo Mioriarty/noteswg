@@ -36,7 +36,7 @@ if($_GET['sql']) {
     <title>Notes WG</title>
     <script>
         function updatePage() {
-            const urlParams = new URLSearchParams(window.location.search);
+            const urlParams = new URLSearchParams();
             urlParams.set('search', document.getElementById("search").value);
             urlParams.set('sql', document.getElementById("sql").value);
             window.location.search = urlParams;
@@ -45,6 +45,28 @@ if($_GET['sql']) {
 </head>
 <body>
     <h1>Notes WG</h1>
+    <h2>Create Note</h2>
+    <textarea id="now_node" rows="4" cols="50" placeholder="node_text" />
+    <button onclick="createNote()">Create</button>
+
+    <h2>View Notes</h2>
+    <input placeholder="Key words" id="search" />
+    <button onclick="search();">Search</button>
+    <button onclick="resetGetParams();">Reset Search</button>
+    <ul>
+        <?php 
+            if(isset($_GET['search'])) {
+                $result = $conn->query("SELECT * FROM notes WHERE note LIKE '%{$_GET['search']}%'");
+            } else {
+                $result = $conn->query("SELECT * FROM notes");
+            }
+            while ($row = $result->fetch_assoc()) {
+                echo "<li>{$row['note']}</li>";
+            }
+        ?>
+    </ul>
+
+
     <input placeholder="Key words" id="search" />
     <input placeholder="SQL Command" id="sql" />
     <button onclick="updatePage();">Run</button>
