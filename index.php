@@ -17,5 +17,6 @@
     <input placeholder="Key words" id="search" />
     <button onclick="search();">Search</button>
     <p>Get Param (search):<?= $_GET['search'] ?></p>
+    <p>Test: <?= getenv('AZURE_MYSQL_HOST') ?></p>
 </body>
 </html>
