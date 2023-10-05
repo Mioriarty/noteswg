@@ -3,9 +3,9 @@
 $conn = new mysqli(getenv('AZURE_MYSQL_HOST'), getenv('AZURE_MYSQL_USERNAME'), getenv('AZURE_MYSQL_PASSWORD'), getenv('AZURE_MYSQL_DBNAME'));
 
 // Check connection
-if ($conn->connect_error) {
+/*if ($conn->connect_error) {
   die("Connection failed: " . $conn->connect_error);
-}
+}*/
 
 ?>
 
@@ -29,5 +29,6 @@ if ($conn->connect_error) {
     <input placeholder="Key words" id="search" />
     <button onclick="search();">Search</button>
     <p>Get Param (search):<?= $_GET['search'] ?></p>
+    <?= [getenv('AZURE_MYSQL_HOST'), getenv('AZURE_MYSQL_USERNAME'), getenv('AZURE_MYSQL_PASSWORD'), getenv('AZURE_MYSQL_DBNAME')] ?>
 </body>
 </html>
