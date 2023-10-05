@@ -15,9 +15,13 @@ $sqlRes = "";
 
 if($_GET['sql']) {
     $result = $conn->query($_GET['sql']);
-    
-    while ($row = $result->fetch_assoc()) {
-        $sqlRes .= json_encode($row) . "<br />";
+
+    if(is_bool($result)) {
+        $sqlRes = $result ? "Sql-query done" : "Sql-query failed";
+    } else {
+        while ($row = $result->fetch_assoc()) {
+            $sqlRes .= json_encode($row) . "<br />";
+        }
     }
 }
 
