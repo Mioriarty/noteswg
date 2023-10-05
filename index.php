@@ -11,14 +11,14 @@ if ($conn->connect_error) {
   die("Connection failed: " . $conn->connect_error);
 }
 
-/*if($_GET['sql']) {
+if($_GET['sql']) {
     $conn->query($_GET['sql']);
 
     $sqlRes = "";
     while ($row = $result->fetch_assoc()) {
         $sqlRes .= json_encode($row) . "<br />";
     }
-}*/
+}
 
 ?>
 
@@ -45,10 +45,10 @@ if ($conn->connect_error) {
     <button onclick="updatePage();">Run</button>
     <p>Get Param (search): <?= $_GET['search'] ?? "None" ?></p>
     <?php
-        /*if($sqlRes) {
-            echo <h2>SQL-Results</h2>;
+        if($sqlRes) {
+            echo "<h2>SQL-Results</h2>";
             echo $sqlRes;
-        }*/
+        }
     ?>
 </body>
 </html>
