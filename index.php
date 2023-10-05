@@ -25,6 +25,14 @@ if(isset($_GET['sql'])) {
     }
 }
 
+if(isset($_GET['new_note'])){
+    $conn->query("INSERT INTO notes VALUES ('{$_GET['new_note']}')");
+}
+
+if(isset($_GET['del_note_text'])) {
+    $conn->query("DELETE FROM notes WHERE note = '{$_GET['del_note_text']}'");
+}
+
 ?>
 
 
@@ -51,12 +59,24 @@ if(isset($_GET['sql'])) {
             const urlParams = new URLSearchParams();
             window.location.search = urlParams;
         }
+
+        function createNote() {
+            const urlParams = new URLSearchParams();
+            urlParams.set('new_note', document.getElementById("new_note").value);
+            window.location.search = urlParams;
+        }
+
+        function deleteNode(text) {
+            const urlParams = new URLSearchParams();
+            urlParams.set('del_note_text', text);
+            window.location.search = urlParams;
+        }
     </script>
 </head>
 <body>
     <h1>Notes WG</h1>
     <h2>Create Note</h2>
-    <textarea id="now_node" rows="4" cols="50" placeholder="node_text"></textarea><br />
+    <textarea id="new_note" rows="4" cols="50" placeholder="node_text"></textarea><br />
     <button onclick="createNote()">Create</button>
 
     <h2>View Notes</h2>
@@ -72,7 +92,7 @@ if(isset($_GET['sql'])) {
                 $result = $conn->query("SELECT * FROM notes");
             }
             while ($row = $result->fetch_assoc()) {
-                echo "<li>{$row['note']}</li>";
+                echo "<li>{$row['note']}<button onclick=\"deleteNode('{$row['note']}')\">x</button></li>";
             }
         ?>
     </ul>
