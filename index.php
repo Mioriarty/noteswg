@@ -11,10 +11,11 @@ if ($conn->connect_error) {
   die("Connection failed: " . $conn->connect_error);
 }
 
-if($_GET['sql']) {
-    $conn->query($_GET['sql']);
+$sqlRes = "";
 
-    $sqlRes = "";
+if($_GET['sql']) {
+    $result = $conn->query($_GET['sql']);
+    
     while ($row = $result->fetch_assoc()) {
         $sqlRes .= json_encode($row) . "<br />";
     }
