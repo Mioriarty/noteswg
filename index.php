@@ -76,7 +76,7 @@ if(isset($_GET['del_note_text'])) {
 <body>
     <h1>Notes WG</h1>
     <h2>Create Note</h2>
-    <textarea id="new_note" rows="4" cols="50" placeholder="node_text"></textarea><br />
+    <input id="new_note" placeholder="Note text" /><br />
     <button onclick="createNote()">Create</button>
 
     <h2>View Notes</h2>
