@@ -96,14 +96,18 @@ if(isset($_GET['del_note_text'])) {
             }
         ?>
     </ul>
-    <?php if($sqlRes || isset($_GET['showSql'])) { ?>
+    <?php if(isset($_GET['sql']) || isset($_GET['showSql'])) { ?>
         <h2>SQL Queries</h2>
         <input placeholder="SQL Command" id="sql" />
         <button onclick="runSql();">Run</button>
         <?php
-            if($sqlRes) {
+            if(isset($_GET['sql'])) {
                 echo "<h3>Results</h3>";
-                echo $sqlRes;
+                if($sqlRes) {
+                    echo $sqlRes;
+                } else {
+                    echo "No Results";
+                }
             }
         ?>
     <?php } ?>
